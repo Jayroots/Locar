@@ -1,0 +1,15 @@
+<div class="recherche-container">
+  <p>Trouvez votre véhicule idéal ! Choisissez vos dates de réservation :</p>
+  <mat-form-field>
+      <mat-label>Choisissez la période</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Départ">
+        <input matEndDate placeholder="Arrivée">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+
+
+</div>
