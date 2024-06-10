@@ -7,13 +7,14 @@ import { HttpClientService } from '../../services/http-client.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IVehicule } from '../../interface/IVehicule';
 import dateFormat from 'dateformat';
+import { RouterLink } from '@angular/router';
 
 
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, JsonPipe, CommonModule, DatePipe],
+  imports: [MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, JsonPipe, CommonModule, DatePipe,RouterLink],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   providers: [provideNativeDateAdapter()]
@@ -56,6 +57,10 @@ range = new FormGroup({
   }
 
 
+
+
+
+  
   recupererTousLesVehiculesParDate(){
 
     this.dateDepartAFormater = this.range.value.start;
@@ -69,6 +74,7 @@ this.dateFinAFormater = this.range.value.end;
       .subscribe(vehiculesParDate => {
         this.listeVehiculesParDate = vehiculesParDate;
         console.log(vehiculesParDate)
+        console.log(this.listeVehiculesParDate)
       }
 
       )

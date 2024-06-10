@@ -6,7 +6,7 @@
       <input matStartDate formControlName="start" placeholder="Start date">
       <input matEndDate formControlName="end" placeholder="End date">
     </mat-date-range-input>
-    <mat-hint>{{range.value.start | date:"yyyy-MM-dd"}} – {{range.value.end | date:"yyyy-MM-dd"}}</mat-hint>
+    <mat-hint></mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
   
@@ -27,7 +27,7 @@
     <div class="card-body">
       <p class="card-title">{{vehicule.brand}}  {{vehicule.model}}  </p>
       <p class="card-text" >  couleur : {{vehicule.color}}</p>
-      <a href="#" class="btn btn-primary">Plus d'infos</a>
+      <a [routerLink]="['/detailsVehicule',vehicule.idVehicle]" class="btn btn-primary">Plus d'infos</a>
 
     </div>
     
