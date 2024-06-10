@@ -12,9 +12,20 @@
         margin: 0 auto;
     }
 
-    button{
-        width: 20%;
-        margin: 0 auto;
-        margin-top:5% ;
-    }
+  
+
 }
+
+.vehicule-card-container{
+    display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+   margin: 0 auto;
+   width: 70%;
+   
+}
+
+
+   
+
+
