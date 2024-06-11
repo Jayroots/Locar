@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { IVehicule } from '../../interface/IVehicule';
 import { HttpClientService } from '../../services/http-client.service';
 
 @Component({
