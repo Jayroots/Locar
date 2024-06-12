@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { AbstractControl, FormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { HttpClientService } from '../../services/http-client.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -16,6 +16,7 @@ import dateFormat from 'dateformat';
 })
 export class InscriptionPageComponent {
  
+  isMajeur:boolean = true;
 
     birthdate: any;
     inscriptionDate: any;
@@ -147,6 +148,19 @@ export class InscriptionPageComponent {
       this.licencesList.push(id);
     } else {
       this.licencesList.splice(index, 1);
+    }
+  }
+
+dateValidator(birthdate:Date):boolean | undefined{
+  const dateControl = new Date(2006, 5, 12); 
+    const dateFormulaire = new Date(birthdate); 
+
+    if(dateFormulaire <= dateControl){
+      this.isMajeur = true;
+      return true;
+    } else {
+      this.isMajeur = false;
+      return false ;
     }
   }
 }
