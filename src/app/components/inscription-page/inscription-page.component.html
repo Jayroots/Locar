@@ -1,0 +1,145 @@
+<h3>INSCRIPTION</h3>
+<br/>
+<form #inscriptionForm="ngForm" (ngSubmit)="inscription()" >
+
+
+
+    <div class="mb-3">
+        <label for="nom" class="form-label">Nom :</label>
+        <input type="text" id="nom" name="nom" [(ngModel)]="lastname" class="form-control" #nom="ngModel" required />
+    </div>
+    <div *ngIf="nom.invalid && (nom.dirty || nom.touched)"
+    class="alert alert-danger">
+    <div *ngIf="nom.hasError('required')">
+        Le nom est requis
+    </div>
+</div>
+
+
+
+<div class="mb-3">
+    <label for="prenom" class="form-label">Prénom :</label>
+    <input type="text" id="prenom" name="prenom" [(ngModel)]="firstname" class="form-control" #prenom="ngModel" required />
+</div>
+<div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)"
+class="alert alert-danger">
+<div *ngIf="prenom.hasError('required')">
+    Le prénom est requis
+</div>
+</div>
+
+
+    <div class="mb-3">
+        <label for="mail" class="form-label">Email :</label>
+        <input type="email" id="mail" name="mail" [(ngModel)]="email" class="form-control" #mail="ngModel" required />
+    </div>
+    <div *ngIf="mail.invalid && (mail.dirty || mail.touched)"
+    class="alert alert-danger">
+    <div *ngIf="mail.hasError('required')">
+        L'email est requis
+    </div>
+</div>
+
+    <div class="mb-3">
+        <label for="mdp" class="form-label">Mot de passe :</label>
+        <input type="password" id="mdp" name="mdp" [(ngModel)]="password" class="form-control" #mdp="ngModel" required />
+    </div>
+        <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)"
+        class="alert  alert-danger">
+        <div *ngIf="mdp.hasError('required')">
+            Le mot de passe est requis
+            </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="mdp2" class="form-label">Confirmez le mot de passe :</label>
+        <input type="password" id="mdp2" name="mdp2" [(ngModel)]="confirmPassword" class="form-control" #mdp2="ngModel" required />
+    </div>
+    
+        <div *ngIf="mdp2.invalid && (mdp2.dirty || mdp2.touched)"
+        class="alert  alert-danger">
+             <div *ngIf="mdp2.hasError('required')">
+            La confirmation du mot de passe est requise
+             </div>
+         </div>
+
+<!-- 
+    <div class="mb-3">
+        <label for="permis" class="form-label">Mes Permis :</label>
+        <select id="permis" name="permis" multiple id="selectPermis" [(ngModel)]="licencesList" class="form-control" #mesPermis="ngModel" (change)="selectOption()">
+            <option *ngFor="let licence of licences" [ngValue]="licence">{{licence.type}}</option>
+            <option value="A">A</option>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B">B</option>
+            <option value="C1">C1</option>
+            <option value="D1">D1</option>
+          </select>
+    </div>
+     -->
+
+    <div class="mb-3">
+        <label for="date" class="form-label">Date de naissance :</label>
+        <input type="date" id="date" name="date" [(ngModel)]="birthdate" class="form-control" #date="ngModel" required />
+    </div>
+    <div *ngIf="date.invalid && (date.dirty || date.touched)"
+        class="alert  alert-danger">
+             <div *ngIf="date.hasError('required')">
+            La date de naissance est requise
+             </div>
+         </div>
+
+
+
+    <div class="mb-3">
+        <label for="rue" class="form-label">Rue :</label>
+        <input type="text" id="rue" name="rue" [(ngModel)]="street" class="form-control" #rue="ngModel" required />
+     </div>
+     <div *ngIf="rue.invalid && (rue.dirty || rue.touched)"
+     class="alert  alert-danger">
+          <div *ngIf="rue.hasError('required')">
+         Le numéro et nom de la rue est requis
+          </div>
+      </div>
+
+
+    <div class="mb-3">
+        <label for="cp" class="form-label">Code Postal :</label>
+        <input type="text" id="cp" name="cp" [(ngModel)]="postalCode" class="form-control" #cp="ngModel" required />
+    </div>
+    <div *ngIf="cp.invalid && (cp.dirty || cp.touched)"
+    class="alert  alert-danger">
+    <div *ngIf="cp.hasError('required')">
+        Un code postal à 5 chiffres est requis
+        </div>
+</div>
+
+
+    <div class="mb-3">
+        <label for="ville" class="form-label">Ville :</label>
+        <input type="text" id="ville" name="ville" [(ngModel)]="city" class="form-control" #ville="ngModel" required />
+    </div>
+    <div *ngIf="ville.invalid && (ville.dirty || ville.touched)"
+    class="alert alert-danger">
+    <div *ngIf="ville.hasError('required')">
+       La ville est requise
+    </div>
+</div>
+
+    @if( mail.pristine || mdp.pristine || (mail.invalid && (mail.dirty || mail.touched))){
+        <div class="button">
+            <button type="submit" [disabled]="true" class="btn btn-primary">Veuillez remplir tous les champs</button>
+        </div>
+    }@else{
+        <div class="button">
+            <button type="submit" [disabled]="false" class="btn btn-primary">Envoyer</button>
+        </div>
+    }
+    <br>
+    
+    <br>
+   
+</form>
+
+<br/>
+<br/>

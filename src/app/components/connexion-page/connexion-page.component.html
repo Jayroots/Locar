@@ -1,0 +1,44 @@
+<h3>CONNEXION</h3>
+<br/>
+<form #connexionForm="ngForm" (ngSubmit)="connexion()" >
+    <div class="mb-3">
+        <label for="id" class="form-label">Email :</label>
+        <input type="text" id="id" name="id" [(ngModel)]="identifiant" class="form-control" #id="ngModel" required />
+    </div>
+    <div *ngIf="id.invalid && (id.dirty || id.touched)"
+    class="alert alert-danger">
+    <div *ngIf="id.hasError('required')">
+        L'email est requis
+    </div>
+</div>
+
+    <div class="mb-3">
+        <label for="mdp" class="form-label">Mot de passe :</label>
+        <input type="password" id="mdp" name="mdp" [(ngModel)]="motDePasse" class="form-control" #mdp="ngModel" required />
+        <div *ngIf="id.invalid && (id.dirty || id.touched)"
+        class="alert  alert-danger">
+        <div *ngIf="mdp.hasError('required')">
+            Le mot de passe est requis
+        </div>
+</div>
+    </div>
+    @if( id.pristine || mdp.pristine || (id.invalid && (id.dirty || id.touched))){
+        <div class="button">
+            <button type="submit" [disabled]="true" class="btn btn-primary">Connexion</button>
+        </div>
+    }@else{
+        <div class="button">
+            <button type="submit" [disabled]="false" class="btn btn-primary">Connexion</button>
+        </div>
+    }
+    <br>
+    <div>
+        <div *ngIf="probAuthent">Erreur d'authentification </div>
+        <div *ngIf="autreProb">Problème de connexion : {{ messageProb }}</div>
+    </div>
+    <br>
+    <a routerLink="/inscription">Pas encore inscrit ? Créez en compte en cliquant ici</a>
+</form>
+
+<br/>
+<br/>

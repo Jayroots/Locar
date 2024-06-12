@@ -1,0 +1,17 @@
+
+    <nav>
+         
+        <a routerLink="home"> Accueil</a>
+        <a routerLink="home" class="logo">LOCAR</a>
+       
+    
+    
+        <a *ngIf="!isConnected" routerLink="connexion"> Connexion / Inscription </a>
+      
+        <p *ngIf="isConnected">Vous êtes connecté ! </p>
+    
+        
+    
+    </nav>
+
+    

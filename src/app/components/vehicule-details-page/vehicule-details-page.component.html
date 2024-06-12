@@ -1,0 +1,35 @@
+
+
+<div class="card" >
+
+    <div class="card-top">
+        
+        <div class="card-top-image">
+            <img src="{{vehicule.imagePath}}" class="card-img-top" >
+        </div>
+        <div class="card-top-aside">
+            <h2 class="card-title">{{vehicule.brand}}  {{vehicule.model}}  </h2>
+            <p class="card-text" >  Couleur : {{vehicule.color}}</p>
+            @if(vehicule.licenceType[0].type === "WITHOUT_LICENCE"){
+                <p class="card-text" >  Permis nécessaire : AUCUN</p>
+
+            } @else{
+                <p class="card-text" >  Permis nécessaire : {{vehicule.licenceType[0].type}}</p>
+            }
+            
+        </div>
+    </div>
+    
+    <div class="card-body">
+     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, accusantium consequuntur amet deserunt quasi, officiis dolores quia aliquam sit quos ut, tenetur doloribus voluptas odit magnam officia nisi aspernatur dolorum?</p>
+     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, 
+        accusantium consequuntur amet deserunt quasi, 
+        officiis dolores quia aliquam sit quos ut, 
+        tenetur doloribus voluptas odit magnam officia nisi aspernatur dolorum?</p>
+
+    </div>
+    <div class="card-bottom-button" >
+        <button type="button" class="btn btn-primary" disabled> Reserver ici </button>
+
+    </div>
+</div>

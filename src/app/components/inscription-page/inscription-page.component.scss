@@ -1,0 +1,21 @@
+form{
+    width: 50%;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 700px) {
+    form{
+        width: 80%;
+    }
+    
+}
+
+
+
+h3{
+    text-align: center;
+    color: rgb(7, 7, 106);
+    padding: 1%;
+    margin-right: 5%;
+}
