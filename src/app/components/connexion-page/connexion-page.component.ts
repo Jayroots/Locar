@@ -3,6 +3,8 @@ import { HttpClientService } from '../../services/http-client.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-connexion-page',
@@ -12,43 +14,31 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './connexion-page.component.scss'
 })
 export class ConnexionPageComponent  {
-  identifiant : string;
-  motDePasse : string;
+  identifiant: string = '';
+  motDePasse: string = '';
+  probAuthent: boolean = false;
+  autreProb: boolean = false;
+  messageProb: string = '';
 
-  probAuthent: boolean;
-  autreProb: boolean;
-  messageProb: string;
+  constructor(private httpService:HttpClientService, private router: Router, private authService: AuthService) {}
 
-  constructor(private httpService : HttpClientService, private router: Router) {
-    this.identifiant = "";
-    this.motDePasse = "";
-
+  connexion(): void {
     this.probAuthent = false;
     this.autreProb = false;
-    this.messageProb = "";
-  }
-
-
-  connexion() {
-    this.probAuthent = false;
-    this.autreProb = false;
-    this.messageProb = "";
+    this.messageProb = '';
 
     this.httpService.connexion(this.identifiant, this.motDePasse).pipe()
-      .subscribe(reponse => {
-        console.log("token obtenu : " + JSON.stringify(reponse));
-        sessionStorage.setItem("token", reponse?.token);
-
-        this.router.navigate(["/home"]);
+      .subscribe(response => {
+        console.log("token obtenu : " + JSON.stringify(response));
+        this.authService.login(response.token);
+        this.router.navigate(['/home']);
       }, error => {
-        if(error.status == 401) {
+        if (error.status === 401) {
           this.probAuthent = true;
         } else {
           this.autreProb = true;
           this.messageProb = "Erreur d'authentification";
         }
-      })
-
-    
+      });
   }
 }

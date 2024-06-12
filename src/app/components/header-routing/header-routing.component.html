@@ -1,17 +1,23 @@
 
     <nav>
          
-        <a routerLink="home"> Accueil</a>
+        <a routerLink="home"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home" style="font-size: 48px; width: 48px; height: 48px;"></mat-icon></a>
+        
         <a routerLink="home" class="logo">LOCAR</a>
        
     
     
         <a *ngIf="!isConnected" routerLink="connexion"> Connexion / Inscription </a>
       
-        <p *ngIf="isConnected">Vous êtes connecté ! </p>
+        <div *ngIf="isConnected">
+            <p>Vous êtes connecté !</p>
+            
+        </div>
     
         
     
     </nav>
 
-    
+    <div class="button-deconnexion-container" *ngIf="isConnected">
+    <button type="button" class="btn btn-outline-danger" (click)="deconnexion()">Déconnexion</button>
+</div>

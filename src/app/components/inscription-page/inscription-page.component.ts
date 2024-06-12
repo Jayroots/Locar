@@ -98,7 +98,7 @@ export class InscriptionPageComponent {
       password : this.password,
       lastname : this.lastname,
       firstname : this.firstname,
-      licencesList : [],
+      licencesList : this.licencesList,
       birthdate : this.birthdate,
       inscriptionDate : this.inscriptionDate,
       street : this.street,
@@ -114,7 +114,7 @@ export class InscriptionPageComponent {
        console.log(this.client)
        console.log(reponse)
 
-        this.router.navigate(["/home"]);
+        this.router.navigate(["/connexion"]);
       }, error => {
         if(error.status == 401) {
           this.probAuthent = true;
@@ -131,12 +131,22 @@ export class InscriptionPageComponent {
 
   initList() : Licence[]{
     const listeLicence:Licence[] = [];
-    listeLicence.push(new Licence(1,"A"));
-    listeLicence.push(new Licence(2,"B"));
-    listeLicence.push(new Licence(3,"C"));
-    listeLicence.push(new Licence(4,"A"));
-    listeLicence.push(new Licence(5,"A"));
+    listeLicence.push(new Licence(2,"A"));
+    listeLicence.push(new Licence(3,"A1"));
+    listeLicence.push(new Licence(4,"A2"));
+    listeLicence.push(new Licence(5,"B"));
+    listeLicence.push(new Licence(6,"C"));
+    listeLicence.push(new Licence(7,"C1"));
+    listeLicence.push(new Licence(8,"D1"));
     return listeLicence;
   } 
 
+  toggleLicenceSelection(id: Licence): void {
+    const index = this.licencesList.indexOf(id);
+    if (index === -1) {
+      this.licencesList.push(id);
+    } else {
+      this.licencesList.splice(index, 1);
+    }
+  }
 }
