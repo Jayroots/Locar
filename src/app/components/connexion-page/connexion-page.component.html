@@ -1,3 +1,4 @@
+<h3>CONNEXION</h3>
 <br/>
 <form #connexionForm="ngForm" (ngSubmit)="connexion()" >
     <div class="mb-3">
@@ -30,11 +31,14 @@
             <button type="submit" [disabled]="false" class="btn btn-primary">Connexion</button>
         </div>
     }
-    
+    <br>
+    <div>
+        <div *ngIf="probAuthent">Erreur d'authentification </div>
+        <div *ngIf="autreProb">Problème de connexion : {{ messageProb }}</div>
+    </div>
+    <br>
+    <a routerLink="/inscription">Pas encore inscrit ? Créez en compte en cliquant ici</a>
 </form>
+
 <br/>
 <br/>
-<div>
-    <div *ngIf="probAuthent">Erreur d'authentification </div>
-    <div *ngIf="autreProb">Problème de connexion : {{ messageProb }}</div>
-</div>

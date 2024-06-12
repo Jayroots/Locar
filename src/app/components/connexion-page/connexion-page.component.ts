@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClientService } from '../../services/http-client.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './connexion-page.component.html',
   styleUrl: './connexion-page.component.scss'
 })
-export class ConnexionPageComponent {
+export class ConnexionPageComponent  {
   identifiant : string;
   motDePasse : string;
 
@@ -28,6 +28,7 @@ export class ConnexionPageComponent {
     this.messageProb = "";
   }
 
+
   connexion() {
     this.probAuthent = false;
     this.autreProb = false;
@@ -36,7 +37,7 @@ export class ConnexionPageComponent {
     this.httpService.connexion(this.identifiant, this.motDePasse).pipe()
       .subscribe(reponse => {
         console.log("token obtenu : " + JSON.stringify(reponse));
-        sessionStorage.setItem("token", reponse?.jwt);
+        sessionStorage.setItem("token", reponse?.token);
 
         this.router.navigate(["/home"]);
       }, error => {
