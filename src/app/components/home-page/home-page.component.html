@@ -11,10 +11,10 @@
     <mat-date-range-picker #picker></mat-date-range-picker>
   
     @if (range.controls.start.hasError('matStartDateInvalid')) {
-      <mat-error>Invalid start date</mat-error>
+      <mat-error>Date de départ invalide</mat-error>
     }
     @if (range.controls.end.hasError('matEndDateInvalid')) {
-      <mat-error>Invalid end date</mat-error>
+      <mat-error>Date de fin invalide</mat-error>
     }
   </mat-form-field>
     <button class="btn btn-primary" (click)="recupererTousLesVehiculesParDate()">Rechercher</button>
@@ -22,10 +22,10 @@
 
 
 <ul class="vehicule-card-container" >
-  <li  class="card" style="width: 18rem;margin: 5%;" *ngFor="let vehicule of listeVehiculesParDate">
+  <li  class="card" style="width: 18rem;margin: 5%; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" *ngFor="let vehicule of listeVehiculesParDate">
     <img src={{vehicule.imagePath}} class="card-img-top">
     <div class="card-body">
-      <p class="card-title">{{vehicule.brand}}  {{vehicule.model}}  </p>
+      <h4 class="card-title" style="font-weight: 600;">{{vehicule.brand}}  {{vehicule.model}}  </h4>
       <p class="card-text" >  couleur : {{vehicule.color}}</p>
       <a [routerLink]="['/detailsVehicule',vehicule.idVehicle]" class="btn btn-primary">Plus d'infos</a>
 
@@ -36,5 +36,13 @@
 </ul>
 
 <div class="photo-accueil-container">
+  <div class="card-home" >
+   
+     <h3 style="font-weight: 600;">BIENVENUE CHEZ LOCAR !</h3>
+     <p>LOUEZ UNE VOITURE DE PREMIÈRE CLASSE. PAYEZ LE PRIX D’UNE ÉCONOMIE</p>
+     <p>Louez des véhicules haut de gamme en France et dans le monde entier. Notre flotte compte plus de 222 000 voitures de location, dont les meilleurs modèles des constructeurs automobiles comme BMW, Mercedes, Audi et bien d'autres encore.</p>
+    
+  
+</div>
  
 </div>

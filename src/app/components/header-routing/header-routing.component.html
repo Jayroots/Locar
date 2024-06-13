@@ -7,7 +7,7 @@
        
     
     
-        <a *ngIf="!isConnected" routerLink="connexion"> Connexion / Inscription </a>
+        <div *ngIf="!isConnected"><a  routerLink="connexion"> Connexion  </a> / <a  routerLink="inscription"> Inscription  </a></div>
       
         <div *ngIf="isConnected">
             <p>Vous êtes connecté !</p>
