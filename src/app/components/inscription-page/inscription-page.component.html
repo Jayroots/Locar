@@ -83,7 +83,7 @@ class="alert alert-danger">
         </div>
 
 
-
+<!--
     <div class="mb-3">
         <label for="date" class="form-label">Date de naissance :</label>
         <input type="date" id="date" name="date" [(ngModel)]="birthdate" class="form-control" #date="ngModel" required pattern="{{ dateValidator(birthdate)}}"/>
@@ -95,7 +95,29 @@ class="alert alert-danger">
              </div>
              <div *ngIf="!isMajeur">Vous devez être majeur pour vous inscrire</div>
          </div>
+        -->
 
+         <div class="mb-3">
+            <mat-form-field class="example-full-width">
+                <mat-label for="date" class="form-label">Date de naissance</mat-label>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" id="date" name="date" [(ngModel)]="birthdate" class="form-control" #date="ngModel" required/>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+         </div>
+         <div *ngIf="date.invalid && (date.dirty || date.touched)"
+         class="alert  alert-danger">
+          @if(date.hasError('required')) {
+            <div *ngIf="date.hasError('required')">
+                La date de naissance est requise
+                 </div>
+          }  @else if (birthdate <= minDate ){
+            <div>Vous devez être encore en vie</div>
+          } @else{
+            <div>Vous devez être majeur</div>
+          }
+          </div>
 
 
     <div class="mb-3">
@@ -117,9 +139,11 @@ class="alert alert-danger">
     <div *ngIf="cp.invalid && (cp.dirty || cp.touched)"
     class="alert  alert-danger">
     <div *ngIf="cp.hasError('required')">
-        Un code postal 
+        Un code postal est requis
         </div>
         <div *ngIf="cp.errors?.['pattern']">Le code postal doit contenir exactement 5 chiffres</div>
+     
+
 </div>
 
 

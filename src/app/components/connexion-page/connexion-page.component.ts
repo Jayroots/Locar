@@ -31,6 +31,7 @@ export class ConnexionPageComponent  {
       .subscribe(response => {
         console.log("token obtenu : " + JSON.stringify(response));
         this.authService.login(response.token);
+        alert("Vous êtes bien connecté ! \n Vous allez être redirigé vers la page d'accueil 🙂")
         this.router.navigate(['/home']);
       }, error => {
         if (error.status === 401) {

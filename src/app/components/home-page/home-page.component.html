@@ -2,7 +2,7 @@
   <p>Trouvez votre véhicule idéal ! Choisissez vos dates de réservation :</p>
   <mat-form-field>
     <mat-label>Choisissez la période</mat-label>
-    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+    <mat-date-range-input [min]="minDate" [max]="maxDate" [formGroup]="range" [rangePicker]="picker">
       <input matStartDate formControlName="start" placeholder="Start date">
       <input matEndDate formControlName="end" placeholder="End date">
     </mat-date-range-input>

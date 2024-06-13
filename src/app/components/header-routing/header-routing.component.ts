@@ -25,6 +25,8 @@ export class HeaderRoutingComponent implements OnInit {
 
   deconnexion(): void {
     this.authService.logout();
+    alert("Vous êtes bien déconnecté ! \n Vous allez être redirigé vers la page de connexion 🙂 \n A bientôt !")
+
     this.router.navigate(['/connexion']);
   }
 }

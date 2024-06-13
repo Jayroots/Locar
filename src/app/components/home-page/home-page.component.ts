@@ -21,6 +21,12 @@ import { RouterLink } from '@angular/router';
 })
 export class HomePageComponent {
 
+  private readonly _currentYear = new Date().getFullYear();
+  readonly minDate = new Date(this._currentYear - 0, 5, 14);
+  readonly maxDate = new Date(this._currentYear + 1, 11, 31);
+  
+
+
   startDate : string = "";
   endDate : string = "";
   dateFormatee : string = "";
