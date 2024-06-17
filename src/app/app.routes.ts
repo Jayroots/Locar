@@ -2,8 +2,9 @@ import { Routes } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { VehiculeDetailsPageComponent } from './components/vehicule-details-page/vehicule-details-page.component';
-import { InscriptionPageComponent } from './components/inscription-page/inscription-page.component';
+
 import { ConnexionPageComponent } from './components/connexion-page/connexion-page.component';
+import { InscriptionPageComponent } from './components/inscription-page/inscription-page.component';
 
 export const routes: Routes = [
     {path:"home", component: HomePageComponent},

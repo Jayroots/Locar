@@ -1,5 +1,5 @@
 .card{
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
      margin-top: 5%;
      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -11,15 +11,24 @@
 
 .card-top-aside{
     padding: 2%;
-    width: 100%;
-    font-size: x-large;
+   
+    
+}
+
+.card-top-image{
+max-width: 35%;
 }
 
 @media (max-width: 1050px) {
     .card-top{
         display: flex;
         flex-direction: column;
+        text-align: center;
     }
+    .card-top-image{
+        max-width: none;
+        }
+
 
 }
 

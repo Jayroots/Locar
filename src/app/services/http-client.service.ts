@@ -8,7 +8,7 @@ import { IClient } from '../interface/IClient';
 export class HttpClientService {
 
 
-url : string = "http://localhost:8080/api"
+url : string = "http://localhost:4200/api"
 
   constructor(private http:HttpClient) { }
 

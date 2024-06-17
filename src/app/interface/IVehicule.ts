@@ -22,4 +22,33 @@ export interface IVehicule {
         transmissionType:string;
         carType:string;
         bagsNumber:number;
+       
+
+   
+    emptyWeight: number
+    height: number
+    bedsNumber: number
+    showerEquipments: number
+    kitchenEquipments: number
+    refrigeratorEquipments: number
+    bedLinens: number
+    campingCarType: string
+
+    maximumCharge: number
+    volume: number
+    truckType: string
+
+    weight: number,
+    electric: boolean,
+    batteryCapacity: number,
+    autonomy: number,
+    discBrake: boolean,
+    bicycleType: string
+    frameSize:number;
+
+    cylinderCapacity: number,
+    cylindersNumber: number,
+    powerKw: number,
+    saddleHeight: number,
+    motoType: string
     }

@@ -1,22 +1,26 @@
 <div class="recherche-container">
-  <p>Trouvez votre véhicule idéal ! Choisissez vos dates de réservation :</p>
-  <mat-form-field>
-    <mat-label>Choisissez la période</mat-label>
-    <mat-date-range-input [min]="minDate" [max]="maxDate" [formGroup]="range" [rangePicker]="picker">
-      <input matStartDate formControlName="start" placeholder="Start date">
-      <input matEndDate formControlName="end" placeholder="End date">
-    </mat-date-range-input>
-    <mat-hint></mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker></mat-date-range-picker>
+  <p style="font-size: large;font-weight: 500;">Trouvez votre véhicule idéal !</p>
+  <p>Choisissez vos dates de réservation :</p>
+  <div class="date-picker-container">
+    <mat-form-field >
+      <mat-label>Cliquez sur le calendrier</mat-label>
+      <mat-date-range-input [min]="minDate" [max]="maxDate" [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date">
+        <input matEndDate formControlName="end" placeholder="End date">
+      </mat-date-range-input>
+      <mat-hint></mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    
+      @if (range.controls.start.hasError('matStartDateInvalid')) {
+        <mat-error>Date de départ invalide</mat-error>
+      }
+      @if (range.controls.end.hasError('matEndDateInvalid')) {
+        <mat-error>Date de fin invalide</mat-error>
+      }
+    </mat-form-field>
+  </div>
   
-    @if (range.controls.start.hasError('matStartDateInvalid')) {
-      <mat-error>Date de départ invalide</mat-error>
-    }
-    @if (range.controls.end.hasError('matEndDateInvalid')) {
-      <mat-error>Date de fin invalide</mat-error>
-    }
-  </mat-form-field>
     <button class="btn btn-primary" (click)="recupererTousLesVehiculesParDate()">Rechercher</button>
 </div>
 
@@ -26,7 +30,12 @@
     <img src={{vehicule.imagePath}} class="card-img-top">
     <div class="card-body">
       <h4 class="card-title" style="font-weight: 600;">{{vehicule.brand}}  {{vehicule.model}}  </h4>
-      <p class="card-text" >  couleur : {{vehicule.color}}</p>
+      @if(vehicule.licenceType[0].type === "WITHOUT_LICENCE"){
+        <p class="card-text">Permis nécessaire : AUCUN</p>
+  
+        } @else{
+      <p class="card-text" >  Permis nécessaire : {{vehicule.licenceType[0].type }}</p>
+        }
       <a [routerLink]="['/detailsVehicule',vehicule.idVehicle]" class="btn btn-primary">Plus d'infos</a>
 
     </div>
@@ -41,8 +50,10 @@
      <h3 style="font-weight: 600;">BIENVENUE CHEZ LOCAR !</h3>
      <p>LOUEZ UNE VOITURE DE PREMIÈRE CLASSE. PAYEZ LE PRIX D’UNE ÉCONOMIE</p>
      <p>Louez des véhicules haut de gamme en France et dans le monde entier. Notre flotte compte plus de 222 000 voitures de location, dont les meilleurs modèles des constructeurs automobiles comme BMW, Mercedes, Audi et bien d'autres encore.</p>
-    
+    <p>Les offres Locar vous permettent de profiter de réductions et d’avantages tout au long de l’année. Du kilométrage illimité aux options additionnelles, parcourez sans plus attendre notre sélection de bons plans et réservez votre prochaine voiture de location aux meilleures conditions.
+      </p>
   
 </div>
  
 </div>
+
