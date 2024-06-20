@@ -1,35 +1,166 @@
+<div class="card">
 
 
-<div class="card" >
 
-    <div class="card-top">
+
+  <div class="card-top">
+
+
+
+
+    <div class="card-top-image">
+      <img src="{{ vehicule.imagePath }}" class="card-img-top" />
+    </div>
+
+
+
+
+    <div class="card-top-aside">
+      <h2 class="card-title" style="font-weight: 600">
+        {{ vehicule.brand }} {{ vehicule.model }}
+      </h2>
+      <p class="card-text">Couleur : {{ vehicule.color }}</p>
+
+      @if(vehicule.licenceType[0].type === "WITHOUT_LICENCE"){
+      <p class="card-text">Permis nécessaire : AUCUN</p>
+
+      } @else{
+      <p class="card-text">
+       Permis nécessaire : {{ vehicule.licenceType[0].type }}
+      </p>
+      }
+      @if(vehicule.typeVehicule === "CAR"){
+      <p class="card-text">Climatisation : {{ vehicule.specificities.airConditioning | boolean}}</p>
+      <p>Nombre de places : {{ vehicule.specificities.placesNumber }} </p>
+      <p>Nombre de portes : {{ vehicule.specificities.doorsNumber }}</p>
+      <p>Type de carburant : {{ vehicule.specificities.fuelType | carburant }} </p>
+    <p> Type de transmission : {{ vehicule.specificities.transmissionType |transmission}}</p>
+      }
+      @else if(vehicule.typeVehicule === "MOTO"){
+        <p>Type de moto : {{vehicule.specificities.motoType}}</p>
+        <p>Type de carburant : {{vehicule.specificities.fuelType | carburant}}</p>
+        <p>Type de transmission : {{vehicule.specificities.transmissionType | transmission}}</p>
+        <p>Hauteur de selle : {{vehicule.specificities.saddleHeight}} mm</p>
+        <p>Nombre de cylindres : {{vehicule.specificities.cylindersNumber}}</p>
+       }
+       @else if(vehicule.typeVehicule === "BICYCLE"){
         
-        <div class="card-top-image">
-            <img src="{{vehicule.imagePath}}" class="card-img-top" >
-        </div>
-        <div class="card-top-aside">
-            <h2 class="card-title">{{vehicule.brand}}  {{vehicule.model}}  </h2>
-            <p class="card-text" >  Couleur : {{vehicule.color}}</p>
-            @if(vehicule.licenceType[0].type === "WITHOUT_LICENCE"){
-                <p class="card-text" >  Permis nécessaire : AUCUN</p>
-
-            } @else{
-                <p class="card-text" >  Permis nécessaire : {{vehicule.licenceType[0].type}}</p>
-            }
-            
-        </div>
-    </div>
+        <p>Ecart selle / pédalier : {{vehicule.specificities.frameSize}} cm</p>
+        <p>Freins à disque : {{vehicule.specificities.discBrake | boolean}}</p>
+        @if(!vehicule.specificities.electric){
+            <p>Type de vélo : {{vehicule.specificities.bicycleType | type}}</p>
+            <p>Poids : {{vehicule.specificities.weight}} kg</p>  }
+      }
+      @else if(vehicule.typeVehicule === "TRUCK"){
+          
+         
+        <p>Type : {{ vehicule.specificities.truckType }}</p>
+      <p>Nombre de places : {{ vehicule.specificities.placesNumber }}</p>
+      <p>Climatisation : {{ vehicule.specificities.airConditioning | boolean}}</p>
+      <p>Type de carburant : {{ vehicule.specificities.fuelType | carburant}}</p>
+  }
+  @else if(vehicule.typeVehicule === "CAMPER_VAN"){
+    <p>Type : {{ vehicule.specificities.campingCarType }}</p>
+    <p>Nombre de places : {{ vehicule.specificities.placesNumber }}</p>
+    <p>Climatisation : {{ vehicule.specificities.airConditioning | boolean }}</p>
+    <p>Type de carburant : {{ vehicule.specificities.fuelType  |  carburant}}</p>
     
-    <div class="card-body">
-     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, accusantium consequuntur amet deserunt quasi, officiis dolores quia aliquam sit quos ut, tenetur doloribus voluptas odit magnam officia nisi aspernatur dolorum?</p>
-     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, 
-        accusantium consequuntur amet deserunt quasi, 
-        officiis dolores quia aliquam sit quos ut, 
-        tenetur doloribus voluptas odit magnam officia nisi aspernatur dolorum?</p>
+}
 
     </div>
-    <div class="card-bottom-button" >
-        <button type="button" class="btn btn-primary" disabled> Reserver ici </button>
 
+    @if(vehicule.typeVehicule === "CAR"){
+        <div class="card-top-aside">  
+            <p>Type : {{ vehicule.specificities.carType |type}}</p>
+        </div>    
+        }
+
+
+@if(vehicule.typeVehicule === "MOTO"){
+    <div class="card-top-aside">   
+        <p> Cylindrée : {{vehicule.specificities.cylinderCapacity}} cm3</p>
+        <p>Puissance : {{vehicule.specificities.powerKw}} ch</p>
+        
     </div>
+}
+
+@if(vehicule.specificities.electric){
+    <div class="card-top-aside"> 
+        <p>Type de vélo : {{vehicule.specificities.bicycleType | type}}</p>
+        <p>Poids : {{vehicule.specificities.weight}} kg</p>
+    <p>Electrique : {{vehicule.specificities.electric|boolean}}</p>
+    <p>Capacité de la batterie : {{vehicule.specificities.batteryCapacity}} ma</p>
+    <p>Autonomie : {{vehicule.specificities.autonomy}} min</p>
 </div>
+}
+@if(vehicule.typeVehicule === "TRUCK"){
+    <div class="card-top-aside"> 
+<p>Charge Maximum: {{ vehicule.specificities.maximumCharge }} kg</p>
+<p>Poids à vide : {{ vehicule.specificities.emptyWeight }} kg</p>
+<p>Volume: {{ vehicule.specificities.volume }} m3</p>
+<p> Type de transmission : {{ vehicule.specificities.transmissionType | transmission}}</p>
+</div>
+}
+@if(vehicule.typeVehicule === "CAMPER_VAN"){
+    <div class="card-top-aside"> 
+        <p>Poids à vide : {{ vehicule.specificities.emptyWeight }} kg</p>
+        <p>Type de transmission : {{ vehicule.specificities.transmissionType |transmission }}</p>
+        <p>Hauteur : {{vehicule.specificities.height }} m</p>
+        <p>Nombre de lits : {{vehicule.specificities.bedsNumber }}</p>
+        <p>Equipement de douche : {{vehicule.specificities.showerEquipments |boolean}}</p>
+        <p>Equipement de cuisine : {{vehicule.specificities.kitchenEquipments | boolean }}</p>
+        <p>Equipement de refrigirateur : {{vehicule.specificities.refrigeratorEquipments | boolean }}</p>
+        <p>Draps de lit : {{vehicule.specificities.bedLinens | boolean}}</p>
+        </div>
+    }
+
+
+  </div>
+
+  <div class="card-body">
+
+  
+        
+        
+  
+        
+    
+  
+      
+
+    <p>
+      Plus rapide. Moins contraignant. Prenez les clés, reprenez la route et
+      profitez d’un service primé près de chez vous.
+    </p>
+    <p>
+      Bénéficiez de plus d’avantages avec Locar Gold Plus Rewards®. et adhérez
+      gratuitement au premier programme de fidélisation de location de voiture¹.
+      Plus besoin de passer au comptoir. Dirigez-vous directement vers la
+      voiture et déposez les clés au retour dans la boîte prévue à cet effet.
+      Accumulez des points grâce à vos locations pour débloquer les échanger
+      contre des journées gratuites de location et des surclassements.
+    </p>
+    <p>
+      Choisissez parmi les berlines de luxe, les voitures sport et les Voitures
+      Electriques zéro émissions, ainsi que les SUV, les utilitaires et beaucoup
+      plus grâce aux centaines d’agences de quartiers et présentes dans les
+      aéroports à travers la France.
+    </p>
+    <p>
+      Nous nettoyons chaque voiture après utilisation en suivant un processus
+      rigoureux en 15 points avant votre arrivée, pour que vous puissiez prendre
+      le volant en toute confiance.
+    </p>
+    <p>
+      <br />
+      Changez d’air, pas vos principes !
+    </p>
+  </div>
+  
+</div>
+<div class="card-bottom-button">
+    <button type="button" class="btn btn-primary" disabled>Reserver ici</button>
+    <label for="button" style="font-size:xx-small"
+      >Service bientôt disponible</label
+    >
+  </div>

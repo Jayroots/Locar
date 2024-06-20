@@ -1,10 +1,14 @@
 nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1%;
-    background-color: rgb(75, 211, 229);
+    background-color: rgb(9, 79, 132);
     color: whitesmoke;
     
+    p{
+        margin : 0
+    }
     
     a {
         text-decoration: none;
@@ -17,4 +21,10 @@ nav {
 .logo{
     font-family:"Climate Crisis", sans-serif ;
     font-size: x-large;
+}
+
+.button-deconnexion-container{
+    display: flex;
+    justify-content: flex-end;
+    margin: 2%;
 }

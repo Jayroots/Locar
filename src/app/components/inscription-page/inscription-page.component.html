@@ -31,29 +31,34 @@ class="alert alert-danger">
 
     <div class="mb-3">
         <label for="mail" class="form-label">Email :</label>
-        <input type="email" id="mail" name="mail" [(ngModel)]="email" class="form-control" #mail="ngModel" required />
+        <input type="email" id="mail" name="mail" [(ngModel)]="email" class="form-control" #mail="ngModel" required email/>
     </div>
     <div *ngIf="mail.invalid && (mail.dirty || mail.touched)"
     class="alert alert-danger">
     <div *ngIf="mail.hasError('required')">
         L'email est requis
     </div>
+    <div *ngIf="mail.hasError('email')">
+        L'email n'est pas valide</div>
 </div>
 
     <div class="mb-3">
         <label for="mdp" class="form-label">Mot de passe :</label>
-        <input type="password" id="mdp" name="mdp" [(ngModel)]="password" class="form-control" #mdp="ngModel" required />
+        <input type="password" id="mdp" name="mdp" [(ngModel)]="password" class="form-control" #mdp="ngModel" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/>
     </div>
         <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)"
         class="alert  alert-danger">
         <div *ngIf="mdp.hasError('required')">
             Le mot de passe est requis
             </div>
+            <div *ngIf="mdp.errors?.['pattern']">
+                Le mot de passe doit contenir au moins 8 caractères, incluant au moins une minuscule, une majuscule, un chiffre et un caractère spécial
+            </div>
     </div>
 
     <div class="mb-3">
         <label for="mdp2" class="form-label">Confirmez le mot de passe :</label>
-        <input type="password" id="mdp2" name="mdp2" [(ngModel)]="confirmPassword" class="form-control" #mdp2="ngModel" required />
+        <input type="password" id="mdp2" name="mdp2" [(ngModel)]="confirmPassword" class="form-control" #mdp2="ngModel" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/>
     </div>
     
         <div *ngIf="mdp2.invalid && (mdp2.dirty || mdp2.touched)"
@@ -61,34 +66,58 @@ class="alert alert-danger">
              <div *ngIf="mdp2.hasError('required')">
             La confirmation du mot de passe est requise
              </div>
+             <div *ngIf="mdp2.errors?.['pattern']">
+                Le mot de passe doit contenir au moins 8 caractères, incluant au moins une minuscule, une majuscule, un chiffre et un caractère spécial
+            </div>
          </div>
 
-<!-- 
-    <div class="mb-3">
-        <label for="permis" class="form-label">Mes Permis :</label>
-        <select id="permis" name="permis" multiple id="selectPermis" [(ngModel)]="licencesList" class="form-control" #mesPermis="ngModel" (change)="selectOption()">
-            <option *ngFor="let licence of licences" [ngValue]="licence">{{licence.type}}</option>
-            <option value="A">A</option>
-            <option value="A1">A1</option>
-            <option value="A2">A2</option>
-            <option value="B">B</option>
-            <option value="C1">C1</option>
-            <option value="D1">D1</option>
-          </select>
-    </div>
-     -->
+        <div class="mb-3">
+            <label class="form-label">Mes Permis :</label>
+            <div *ngFor="let licence of licences">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [id]="licence" [value]="licence"
+                           (change)="toggleLicenceSelection(licence)" [checked]="licencesList.includes(licence)">
+                    <label class="form-check-label" [for]="licence">{{licence.type}}</label>
+                </div>
+            </div>
+        </div>
 
+
+<!--
     <div class="mb-3">
         <label for="date" class="form-label">Date de naissance :</label>
-        <input type="date" id="date" name="date" [(ngModel)]="birthdate" class="form-control" #date="ngModel" required />
+        <input type="date" id="date" name="date" [(ngModel)]="birthdate" class="form-control" #date="ngModel" required pattern="{{ dateValidator(birthdate)}}"/>
     </div>
     <div *ngIf="date.invalid && (date.dirty || date.touched)"
         class="alert  alert-danger">
              <div *ngIf="date.hasError('required')">
             La date de naissance est requise
              </div>
+             <div *ngIf="!isMajeur">Vous devez être majeur pour vous inscrire</div>
          </div>
+        -->
 
+         <div class="mb-3">
+            <mat-form-field class="example-full-width">
+                <mat-label for="date" class="form-label">Date de naissance</mat-label>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" id="date" name="date" [(ngModel)]="birthdate" class="form-control" #date="ngModel" required/>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+         </div>
+         <div *ngIf="date.invalid && (date.dirty || date.touched)"
+         class="alert  alert-danger">
+          @if(date.hasError('required')) {
+            <div *ngIf="date.hasError('required')">
+                La date de naissance est requise
+                 </div>
+          }  @else if (birthdate <= minDate ){
+            <div>Vous devez être encore en vie</div>
+          } @else{
+            <div>Vous devez être majeur</div>
+          }
+          </div>
 
 
     <div class="mb-3">
@@ -105,13 +134,16 @@ class="alert alert-danger">
 
     <div class="mb-3">
         <label for="cp" class="form-label">Code Postal :</label>
-        <input type="text" id="cp" name="cp" [(ngModel)]="postalCode" class="form-control" #cp="ngModel" required />
+        <input type="text" id="cp" name="cp" [(ngModel)]="postalCode" class="form-control" #cp="ngModel" required pattern="[0-9]{5}" />
     </div>
     <div *ngIf="cp.invalid && (cp.dirty || cp.touched)"
     class="alert  alert-danger">
     <div *ngIf="cp.hasError('required')">
-        Un code postal à 5 chiffres est requis
+        Un code postal est requis
         </div>
+        <div *ngIf="cp.errors?.['pattern']">Le code postal doit contenir exactement 5 chiffres</div>
+     
+
 </div>
 
 
